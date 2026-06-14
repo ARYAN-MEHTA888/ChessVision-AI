@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -17,8 +18,16 @@ st.set_page_config(
 # LOAD MODEL
 # ======================
 
-model = joblib.load("best_xgb_model.pkl")
-encoder = joblib.load("winner_encoder.pkl")
+# 1. Get the absolute path of the directory containing this script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Construct the full paths to the model files
+model_path = os.path.join(current_dir, "best_xgb_model.pkl")
+encoder_path = os.path.join(current_dir, "winner_encoder.pkl")
+
+# 3. Load the models using the absolute paths
+model = joblib.load(model_path)
+encoder = joblib.load(encoder_path)
 
 # ======================
 # DESIGN
